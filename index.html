@@ -105,14 +105,20 @@
         padding: 5px 0px;
         font-size: 12px;
       }
-      .QRText{
-        font-size: 18px;
-        padding: 131px 0px 0px 230px;
+      .QRText {
+        font-size: 20px;
+        padding-left: 280px;
       }
-      .qrImg img{
-        width: 100%; 
+      .qrImg img {
+        width: 100%;
         margin-left: -80px;
       }
+      .textQr {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+      }
+
       /*Mobile*/
       @media (min-width: 480px) and (max-width: 1280px) {
         section {
@@ -150,42 +156,41 @@
         .saveBtn {
           font-size: 40px;
         }
-        .QRText{
-       font-size: 45px !important;
-        padding: 0px !important; 
-      }
-      .textQr{
-        margin: auto !important;
-      }
-      .qrImg img{
-        margin: auto 0px;
+        .QRText {
+          font-size: 50px !important;
+         padding: 21px !important;
+        }
+        .textQr {
+          margin: auto !important;
+          display: block !important;
+        }
+         .qrImg img {
+        margin-left: 0px;
       }
       }
     </style>
   </head>
   <body>
-   
     <section class="">
-        <div class="container row textQr">
-            <div class="col-lg-6">
-              <p class="QRText">
-                ओबीसी अधिकारी कर्मचारी संघटनेच्या सदस्य नोंदीसाठी खाली दिलेल्या <span style="color: #e35f14;">QR
-                    Code</span> वर 100 रु. फी भरावी आणि ट्रान्झेक्शन कोड (Transactions) छायाचित्र
-                (Screenshot) दिलेल्या माहिती सोबत सदस्य नोंदणी फॉर्म वर समाविष्ट
-                करावे.<br><span style="color: #e35f14;">Itar Magaswargiya Adhikari Karmchari Welfare UPI ID :
-                    rsgbcQ2252@icic</span> 
-              </p>
-            </div>
-            <div class="col-lg-6 qrImg">
-              <img
-                src="./OBCQR.png"
-                alt="obc Qr"
-                
-              />
-            </div>
-          </div>
+      <div class="textQr">
+        <div class="">
+          <p class="QRText">
+            ओबीसी अधिकारी कर्मचारी संघटनेच्या सदस्य नोंदीसाठी खाली दिलेल्या
+            <span style="color: #e35f14">QR Code</span> वर 100 रु. फी भरावी आणि
+            आणि पैसे भरल्याची पावती (Transactions Receipt) व पावती क्रमांक
+            (Transactions Id) दिलेल्या माहिती सोबत सदस्य नोंदणी फॉर्ममध्ये
+            समाविष्ट करावे<br />
+            Account Name:-<br /><span style="color: #e35f14">
+              Itar Magaswargiya Adhikari Karmchari Welfare <br />
+              <b>UPI ID :</b> rsgbcQ2252@icic</span
+            >
+          </p>
+        </div>
+        <div class="qrImg">
+          <img src="./OBCQR.png" alt="obc Qr" />
+        </div>
+      </div>
       <form id="form1" runat="server">
-      
         <div class="heading">
           <p className="text-center ">सदस्य-नोंदणी</p>
         </div>
@@ -372,12 +377,12 @@
             </div>
 
             <div class="col-lg-6 col-md-12 col-sm-12">
-              <p>Upload Transaction Receipt:</p>
+              <p>पैसे भरल्याची पावती:</p>
               <input class="formField" type="file" id="file" />
               <p id="demo23" class="error-text"></p>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12">
-              <p>Transaction Id:</p>
+              <p>पावती क्रमांक:</p>
               <input class="formField" type="text" id="transactionId" />
               <p id="demo24" class="error-text"></p>
             </div>
