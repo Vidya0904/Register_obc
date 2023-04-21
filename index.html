@@ -1,0 +1,842 @@
+﻿<!DOCTYPE html>
+<html>
+  <head runat="server">
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      section {
+        /* display: flex; */
+        /* justify-content: center; */
+        display: grid;
+        place-items: center;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      form {
+        border: 1px solid rgb(138, 138, 138);
+        box-shadow: 1px 3px 5px rgb(185, 185, 185);
+        width: 50%;
+      }
+
+      p {
+        margin: 0;
+        padding: 5px 0px;
+      }
+
+      .mainForm {
+        background-color: white;
+        padding: 10px;
+      }
+
+      .mainForm2 {
+        padding: 20px;
+      }
+
+      .formField {
+        padding: 10px;
+        outline: none;
+        width: 100%;
+        border: 0.5px solid rgb(214, 214, 214);
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px rgb(219, 219, 219);
+        font-size: 15px;
+      }
+
+      /* . {
+          padding: 5px;
+        } */
+
+      .off-add input {
+        padding: 10px;
+        outline: none;
+        /* width: 635px; */
+        border: 0.5px solid rgb(214, 214, 214);
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px rgb(219, 219, 219);
+        width: 100%;
+      }
+
+      .select-div {
+        padding: 10px;
+        outline: none;
+        border: 0.5px solid rgb(214, 214, 214);
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px rgb(219, 219, 219);
+      }
+
+      .btnSave {
+        padding: 20px 0;
+      }
+
+      .saveBtn {
+        background-color: blue;
+        padding: 10px;
+        border: 1px solid;
+        border-radius: 5px;
+        font-size: 15px;
+        text-transform: uppercase;
+        color: white;
+        outline: none;
+        width: 100%;
+        box-shadow: 1px 1px 3px rgb(219, 219, 219);
+        font-size: 15px;
+      }
+
+      .heading {
+        padding: 20px;
+        background-color: #e35f14;
+        text-align: center;
+        font-size: 27px;
+        color: white;
+        font-weight: bolder;
+      }
+
+      .error-text {
+        color: red;
+        padding: 5px 0px;
+        font-size: 12px;
+      }
+      .QRText{
+        font-size: 18px;
+        padding: 131px 0px 0px 230px;
+      }
+      .qrImg img{
+        width: 100%; 
+        margin-left: -80px;
+      }
+      /*Mobile*/
+      @media (min-width: 480px) and (max-width: 1280px) {
+        section {
+          display: block;
+          padding: 20px;
+        }
+
+        form {
+          width: 100%;
+        }
+
+        p {
+          font-size: 40px;
+        }
+
+        .formField {
+          font-size: 40px;
+          height: 100px;
+        }
+
+        .select-div {
+          width: 100%;
+          padding: 20px;
+          font-size: 40px;
+        }
+
+        .error-text {
+          font-size: 20px;
+        }
+
+        .mainForm2 {
+          padding: 40px;
+        }
+
+        .saveBtn {
+          font-size: 40px;
+        }
+        .QRText{
+       font-size: 45px !important;
+        padding: 0px !important; 
+      }
+      .textQr{
+        margin: auto !important;
+      }
+      }
+    </style>
+  </head>
+  <body>
+   
+    <section class="">
+        <div class="container row textQr">
+            <div class="col-lg-6">
+              <p class="QRText">
+                ओबीसी अधिकारी कर्मचारी संघटनेच्या सदस्य नोंदीसाठी खाली दिलेल्या <span style="color: #e35f14;">QR
+                    Code</span> वर 100 रु. फी भरावी आणि ट्रान्झेक्शन कोड (Transactions) छायाचित्र
+                (Screenshot) दिलेल्या माहिती सोबत सदस्य नोंदणी फॉर्म वर समाविष्ट
+                करावे.<br><span style="color: #e35f14;">Itar Magaswargiya Adhikari Karmchari Welfare UPI ID :
+                    rsgbcQ2252@icic</span> 
+              </p>
+            </div>
+            <div class="col-lg-6 qrImg">
+              <img
+                src="./Image/OBCQR.png"
+                alt="obc Qr"
+                
+              />
+            </div>
+          </div>
+      <form id="form1" runat="server">
+      
+        <div class="heading">
+          <p className="text-center ">सदस्य-नोंदणी</p>
+        </div>
+        <div class="mainForm">
+          <div class="row mainForm2">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>संपूर्ण नाव:</p>
+              <input class="formField" type="text" id="FullName" />
+              <p id="demo" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>ईमेल आयडी:</p>
+              <input class="formField" type="text" id="Email" />
+              <p id="demo1" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>मोबाईल क्रमांक:</p>
+              <input class="formField" type="text" id="Mobile" />
+              <p id="demo2" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>व्हाट्स अप्प क्रमांक:</p>
+              <input class="formField" type="text" id="WhatsAppMobile" />
+              <p id="demo3" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>संपूर्ण पत्ता:</p>
+              <input class="formField" type="text" id="Address" />
+              <p id="demo4" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>तालुका:</p>
+              <input class="formField" type="text" id="Taluka" />
+              <p id="demo5" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>जिल्हा :</p>
+              <input class="formField" type="text" id="District" />
+              <p id="demo6" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>राज्य:</p>
+              <input class="formField" type="text" id="State" />
+              <p id="demo7" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>शहर:</p>
+              <input class="formField" type="text" id="City" />
+              <p id="demo8" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>जन्मतारीख:</p>
+              <input class="formField" type="date" id="BirthDate" />
+              <p id="demo9" class="error-text"></p>
+            </div>
+
+            <div>
+              <p>खालीलपैकी आपला व्यवसाय कोणता:</p>
+
+              <select
+                id="SelectBuisiness"
+                class="col-lg-12 col-md-12 col-sm-12 select-div"
+              >
+                <option value="">--Select --</option>
+                <option value="नोकरी">नोकरी</option>
+                <option value="व्यापारउद्योग">व्यापारउद्योग</option>
+                <option value="शेती">शेती</option>
+                <option value="शिक्षण">शिक्षण</option>
+                <option value="इतर">इतर</option>
+              </select>
+              <p id="demo10" class="error-text"></p>
+            </div>
+            <div id="job" style="display: none">
+              <div class="row">
+                <div class="col-lg-6 col-md-12">
+                  <p>नोकरी</p>
+
+                  <select id="jobOptions" class="col-lg-12 select-div">
+                    <option value="">-- select --</option>
+                    <option value="आस्थापना">आस्थापना</option>
+                    <option value="शासकीय">शासकीय</option>
+                    <option value="निमशासकीय">निमशासकीय</option>
+                    <option value="खाजगी">खाजगी</option>
+                  </select>
+                  <p id="demo11" class="error-text"></p>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>पद :</p>
+                  <input class="formField" type="text" id="position" />
+                  <p id="demo12" class="error-text"></p>
+                </div>
+              </div>
+              <div class="">
+                <div class="off-add">
+                  <p>कार्यालयाचे नाव व पत्ता :</p>
+                  <input class="formField" type="text" id="OfficeNameAddress" />
+                  <p id="demo13" class="error-text"></p>
+                </div>
+              </div>
+            </div>
+            <div id="buisiness" style="display: none">
+              <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>व्यापार-उद्योगाचा स्वरूप :</p>
+                  <input class="formField" type="text" id="buisinessType" />
+                  <p id="demo14" class="error-text"></p>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>व्यापार-उद्योगाचा पत्ता :</p>
+                  <input class="formField" type="text" id="buisinessAddress" />
+                  <p id="demo15" class="error-text"></p>
+                </div>
+              </div>
+            </div>
+
+            <div id="farm" style="display: none">
+              <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>शेती</p>
+
+                  <select
+                    id="farmOptions"
+                    class="col-lg-12 col-md-12 col-sm-12 select-div"
+                  >
+                    <option value="">-- select --</option>
+                    <option value="अल्पभूधारक">अल्पभूधारक</option>
+                    <option value="भूधारक">भूधारक</option>
+                    <option value="ओलीत">ओलीत</option>
+                    <option value="कोरडवाहू">कोरडवाहू</option>
+                  </select>
+                  <p id="demo16" class="error-text"></p>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>शेतीचा पत्ता :</p>
+                  <input class="formField" type="text" id="farmAddress" />
+                  <p id="demo17" class="error-text"></p>
+                </div>
+              </div>
+            </div>
+
+            <div id="education" style="display: none">
+              <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>शिक्षण</p>
+
+                  <select
+                    id="educationOptions"
+                    class="col-lg-12 col-md-12 col-sm-12 select-div"
+                  >
+                    <option value="">-- select --</option>
+                    <option value="पदवी">पदवी</option>
+                    <option value="पदव्युत्तर">पदव्युत्तर</option>
+                    <option value="पदव्युत्तर पुढे">पदव्युत्तर पुढे</option>
+                  </select>
+                  <p id="demo18" class="error-text"></p>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>शिक्षण :</p>
+                  <input class="formField" type="text" id="edu" />
+                  <p id="demo19" class="error-text"></p>
+                </div>
+              </div>
+              <div class="">
+                <div class="off-add">
+                  <p>शिक्षण संस्थेचे नाव व पत्ता :</p>
+                  <input class="formField" type="text" id="eduNameAddress" />
+                  <p id="demo20" class="error-text"></p>
+                </div>
+              </div>
+            </div>
+            <div id="other" style="display: none">
+              <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>इतर स्वरूप :</p>
+                  <input class="formField" type="text" id="otherType" />
+                  <p id="demo21" class="error-text"></p>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <p>पत्ता :</p>
+                  <input class="formField" type="text" id="otherAddress" />
+                  <p id="demo22" class="error-text"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>Upload Transaction Receipt:</p>
+              <input class="formField" type="file" id="file" />
+              <p id="demo23" class="error-text"></p>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <p>Transaction Id:</p>
+              <input class="formField" type="text" id="transactionId" />
+              <p id="demo24" class="error-text"></p>
+            </div>
+            <div class="btnSave">
+              <input
+                type="button"
+                id="btnSave"
+                value="Save"
+                class="saveBtn col-lg-12 col-md-6 col-sm-6"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="formField" style="display: none">
+          <div class="">
+            <p>fileName:</p>
+            <input class="formField" type="text" id="fileName" />
+          </div>
+        </div>
+      </form>
+    </section>
+    <!--<span id="lblMessage" style="color: Green"></span>-->
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+    ></script>
+    <script type="text/javascript">
+      $("body").on("click", "#btnUpload", function () {
+        var formData = new FormData();
+        formData.append("fileName", $("#fileName").val());
+        formData.append("file", $("#file")[0].files[0]);
+        $.ajax({
+          url: "UploadService.asmx/UploadFiles",
+          type: "POST",
+          data: formData,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (fileName) {
+            $("#fileProgress").hide();
+            // $("#lblMessage").html("<b>" + fileName + "</b> has been uploaded.");
+          },
+          xhr: function () {
+            var fileXhr = $.ajaxSettings.xhr();
+            if (fileXhr.upload) {
+              $("progress").show();
+              fileXhr.upload.addEventListener(
+                "progress",
+                function (e) {
+                  if (e.lengthComputable) {
+                    $("#fileProgress").attr({
+                      value: e.loaded,
+                      max: e.total,
+                    });
+                  }
+                },
+                false
+              );
+            }
+            return fileXhr;
+          },
+        });
+      });
+      /* validations */
+
+      function validate() {
+        var regex_email = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/;
+        var regex_name = /^[A-Za-z\s]+$/;
+        var mobilenumber = /^[0-9]/;
+
+        var FullName = document.forms["form1"]["FullName"].value;
+        var Email = document.forms["form1"]["Email"].value;
+        var Mobile = document.forms["form1"]["Mobile"].value;
+        var WhatsAppMobile = document.forms["form1"]["WhatsAppMobile"].value;
+        var Address = document.forms["form1"]["Address"].value;
+        var Taluka = document.forms["form1"]["Taluka"].value;
+        var District = document.forms["form1"]["District"].value;
+        var City = document.forms["form1"]["City"].value;
+        var State = document.forms["form1"]["State"].value;
+        var BirthDate = document.forms["form1"]["BirthDate"].value;
+        var Business = document.forms["form1"]["buisinessType"].value;
+        var SelectBuisiness = document.forms["form1"]["SelectBuisiness"].value;
+        var Naukri = document.forms["form1"]["jobOptions"].value;
+        var Designation = document.forms["form1"]["position"].value;
+        var OfficeNameAddress =
+          document.forms["form1"]["OfficeNameAddress"].value;
+        var BuisinessAddress =
+          document.forms["form1"]["buisinessAddress"].value;
+        var FarmType = document.forms["form1"]["farmOptions"].value;
+        var FarmAddress = document.forms["form1"]["farmAddress"].value;
+        var Education = document.forms["form1"]["educationOptions"].value;
+        var EducationName = document.forms["form1"]["edu"].value;
+        var EducationAddress = document.forms["form1"]["eduNameAddress"].value;
+        var Other = document.forms["form1"]["otherType"].value;
+        var OtherAddress = document.forms["form1"]["otherAddress"].value;
+        var TransactionId = document.forms["form1"]["transactionId"].value;
+        var file = document.forms["form1"]["file"].value;
+
+        if (FullName === "") {
+          document.getElementById("demo").innerHTML = "please enter full name";
+        } else if (!FullName.match(regex_name)) {
+          document.getElementById("demo").innerHTML = "Numbers not allowed";
+        } else {
+          document.getElementById("demo").innerHTML = "";
+        }
+
+        if (Email === "") {
+          document.getElementById("demo1").innerHTML = "Please enter Email id ";
+        } else if (!Email.match(regex_email)) {
+          document.getElementById("demo1").innerHTML =
+            "Please enter valid email";
+        } else {
+          document.getElementById("demo1").innerHTML = "";
+        }
+
+        if (Mobile === "") {
+          document.getElementById("demo2").innerHTML =
+            "Please enter mobile number";
+        } else if (!Mobile.match(mobilenumber)) {
+          document.getElementById("demo2").innerHTML =
+            "Please enter number only";
+        } else {
+          document.getElementById("demo2").innerHTML = "";
+        }
+        if (WhatsAppMobile === "") {
+          document.getElementById("demo3").innerHTML =
+            "Please enter mobile number";
+        } else if (!WhatsAppMobile.match(mobilenumber)) {
+          document.getElementById("demo3").innerHTML =
+            "Please enter number only";
+        } else {
+          document.getElementById("demo3").innerHTML = "";
+        }
+
+        if (Address === "") {
+          document.getElementById("demo4").innerHTML =
+            "Please enter your full addres";
+        } else {
+          document.getElementById("demo4").innerHTML = "";
+        }
+
+        if (Taluka === "") {
+          document.getElementById("demo5").innerHTML =
+            "Please enteryour taluka";
+        } else {
+          document.getElementById("demo5").innerHTML = "";
+        }
+        if (District === "") {
+          document.getElementById("demo6").innerHTML =
+            "Please enter your district";
+        } else {
+          document.getElementById("demo6").innerHTML = "";
+        }
+
+        if (City === "") {
+          document.getElementById("demo7").innerHTML = "Please enter your city";
+        } else {
+          document.getElementById("demo7").innerHTML = "";
+        }
+
+        if (State === "") {
+          document.getElementById("demo8").innerHTML =
+            "Please enter your state";
+        } else {
+          document.getElementById("demo8").innerHTML = "";
+        }
+
+        if (BirthDate === "") {
+          document.getElementById("demo9").innerHTML =
+            "Please enter your birthdate";
+        } else {
+          document.getElementById("demo9").innerHTML = "";
+        }
+        if (SelectBuisiness === "") {
+          document.getElementById("demo10").innerHTML = "Please Select Option";
+        } else {
+          document.getElementById("demo10").innerHTML = "";
+
+          if (SelectBuisiness === "नोकरी") {
+            if (Naukri === "") {
+              document.getElementById("demo11").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo11").innerHTML = "";
+            }
+            if (Designation === "") {
+              document.getElementById("demo12").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo12").innerHTML = "";
+            }
+            if (OfficeNameAddress === "") {
+              document.getElementById("demo13").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo13").innerHTML = "";
+            }
+          } else if (SelectBuisiness === "व्यापारउद्योग") {
+            if (Business === "") {
+              document.getElementById("demo14").innerHTML =
+                "Please enter your number";
+            } else {
+              document.getElementById("demo14").innerHTML = "";
+            }
+            if (BuisinessAddress === "") {
+              document.getElementById("demo15").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo15").innerHTML = "";
+            }
+          } else if (SelectBuisiness === "शेती") {
+            if (FarmType === "") {
+              document.getElementById("demo16").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo16").innerHTML = "";
+            }
+
+            if (FarmAddress === "") {
+              document.getElementById("demo17").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo17").innerHTML = "";
+            }
+          } else if (SelectBuisiness === "शिक्षण") {
+            if (Education === "") {
+              document.getElementById("demo18").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo18").innerHTML = "";
+            }
+
+            if (EducationName === "") {
+              document.getElementById("demo19").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo19").innerHTML = "";
+            }
+
+            if (EducationAddress === "") {
+              document.getElementById("demo20").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo20").innerHTML = "";
+            }
+          } else if (SelectBuisiness === "इतर") {
+            if (Other === "") {
+              document.getElementById("demo21").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo21").innerHTML = "";
+            }
+
+            if (OtherAddress === "") {
+              document.getElementById("demo22").innerHTML =
+                "Please enter mobile number";
+            } else {
+              document.getElementById("demo22").innerHTML = "";
+            }
+          }
+        }
+
+        if (file === "") {
+          document.getElementById("demo23").innerHTML =
+            "Please upload screen shot of your Transaction Receipt";
+        } else {
+          document.getElementById("demo23").innerHTML = "";
+          return true;
+        }
+
+        if (TransactionId === "") {
+          document.getElementById("demo24").innerHTML =
+            "Please enter mobile number";
+        } else {
+          document.getElementById("demo24").innerHTML = "";
+          return true;
+        }
+      }
+
+      $("body").on("click", "#btnSave", function () {
+        if (validate()) {
+          var formData = new FormData();
+          formData.append("fileName", $("#fileName").val());
+          formData.append("file", $("#file")[0].files[0]);
+          formData.append("FullName", $("#FullName").val());
+          formData.append("Email", $("#Email").val());
+          formData.append("Mobile", $("#Mobile").val());
+          formData.append("WhatsAppMobile", $("#WhatsAppMobile").val());
+          formData.append("Address", $("#Address").val());
+          formData.append("Taluka", $("#Taluka").val());
+          formData.append("District", $("#District").val());
+          formData.append("City", $("#City").val());
+          formData.append("State", $("#State").val());
+          formData.append("BirthDate", $("#BirthDate").val());
+          formData.append("Business", $("#buisinessType").val());
+          formData.append("Naukri", $("#jobOptions").val());
+          formData.append("Designation", $("#position").val());
+          formData.append("OfficeNameAddress", $("#OfficeNameAddress").val());
+          formData.append("SelectBuisiness", $("#SelectBuisiness").val());
+          formData.append("BuisinessAddress", $("#buisinessAddress").val());
+          formData.append("FarmType", $("#farmOptions").val());
+          formData.append("FarmAddress", $("#farmAddress").val());
+          formData.append("Education", $("#educationOptions").val());
+          formData.append("EducationName", $("#edu").val());
+          formData.append("EducationAddress", $("#eduNameAddress").val());
+          formData.append("Other", $("#otherType").val());
+          formData.append("OtherAddress", $("#otherAddress").val());
+          formData.append("TransactionId", $("#transactionId").val());
+
+          $.ajax({
+            url: "UploadService.asmx/SaveRecord",
+            type: "POST",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (AdminID) {
+              $("#fileProgress").hide();
+              $("#fileName").val(AdminID);
+
+              if (AdminID == "Maximum request length exceeded.") {
+                alert("Please select file size below 3MB.....");
+              }
+              if (AdminID == "E") {
+                alert("Mobile number already exists..");
+              } else {
+                // $("#lblMessage").html("<b>" + fileName + "</b> has been uploaded.");
+
+                var formData = new FormData();
+                formData.append("fileName", $("#fileName").val());
+                formData.append("file", $("#file")[0].files[0]);
+                $.ajax({
+                  url: "UploadService.asmx/UploadFiles",
+                  type: "POST",
+                  data: formData,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success: function (fileName) {
+                    $("#fileProgress").hide();
+                    //$("#lblMessage").html("<b>" + fileName + "</b> has been uploaded.");
+                  },
+                  xhr: function () {
+                    var fileXhr = $.ajaxSettings.xhr();
+                    if (fileXhr.upload) {
+                      $("progress").show();
+                      fileXhr.upload.addEventListener(
+                        "progress",
+                        function (e) {
+                          if (e.lengthComputable) {
+                            $("#fileProgress").attr({
+                              value: e.loaded,
+                              max: e.total,
+                            });
+                            alert("Record saved .....");
+                            //    window.location = "/card.html?ID=" + AdminID;
+                            window.open("/card.html?ID=" + AdminID, "_blank");
+                          }
+                        },
+                        false
+                      );
+                    }
+                    return fileXhr;
+                  },
+                });
+              }
+            },
+            xhr: function () {
+              var fileXhr = $.ajaxSettings.xhr();
+              if (fileXhr.upload) {
+                $("progress").show();
+                fileXhr.upload.addEventListener(
+                  "progress",
+                  function (e) {
+                    if (e.lengthComputable) {
+                      $("#fileProgress").attr({
+                        value: e.loaded,
+                        max: e.total,
+                      });
+                    }
+                  },
+                  false
+                );
+              }
+              return fileXhr;
+            },
+          });
+        } else {
+          alert("please enter all fields");
+        }
+      });
+
+      // conditional chnge
+
+      $("#SelectBuisiness").change(function () {
+        if ($(this).val() == "0") {
+          $("#job").hide(),
+            $("#buisiness").hide(),
+            $("#farm").hide(),
+            $("#education").hide(),
+            $("#other").hide();
+        }
+        if ($(this).val() == "नोकरी") {
+          clear();
+          $("#job").show(),
+            $("#buisiness").hide(),
+            $("#farm").hide(),
+            $("#education").hide(),
+            $("#other").hide();
+        }
+        if ($(this).val() == "व्यापारउद्योग") {
+          clear();
+          $("#job").hide(),
+            $("#buisiness").show(),
+            $("#farm").hide(),
+            $("#education").hide(),
+            $("#other").hide();
+        }
+        if ($(this).val() == "शेती") {
+          clear();
+          $("#job").hide(),
+            $("#buisiness").hide(),
+            $("#farm").show(),
+            $("#education").hide(),
+            $("#other").hide();
+        }
+        if ($(this).val() == "शिक्षण") {
+          $("#job").hide(),
+            $("#buisiness").hide(),
+            $("#farm").hide(),
+            $("#education").show(),
+            $("#other").hide();
+        }
+        if ($(this).val() == "इतर") {
+          clear();
+          $("#job").hide(),
+            $("#buisiness").hide(),
+            $("#farm").hide(),
+            $("#education").hide(),
+            $("#other").show();
+        }
+      });
+
+      function clear() {
+        $("#buisinessType").val(""), $("#buisinessAddress").val("");
+
+        $("#jobOptions").val("");
+        $("#position").val("");
+        $("#OfficeNameAddress").val("");
+
+        $("#farmOptions").val("");
+        $("#farmAddress").val("");
+
+        $("#educationOptions").val("");
+        $("#edu").val("");
+        $("#eduNameAddress").val("");
+
+        $("#otherType").val("");
+        $("#otherAddress").val("");
+
+        $("#transactionId").val("");
+      }
+    </script>
+  </body>
+</html>
